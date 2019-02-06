@@ -3,6 +3,10 @@ import pandas as pd
 import numpy as np
 import math
 
+# sort_field: set up shapefiles to define the field in attribute table by which they should be sorted 
+def sort_field(shaperecord):
+      return shaperecord.record[0]
+
 # readshapestopandas: function which reads a shapefile into the workspace and sets up the shapefile points in a dataframe by the lat and lon of the points. Then converts to metres by bodging using the earth as a sphere. the dataframe is ordered by the year the profile was drawn
 
 def readshapestopandas(fname):
@@ -10,10 +14,9 @@ def readshapestopandas(fname):
     shaperecords = reader.shapeRecords()
 
     shapesriver = [ ]  # set up dataframe
-    #def y(shaperecord):
-      # return shaperecord.record[0]
 
-        #shaperecords.sort(key=y)
+    shaperecords.sort(key=sort_field)
+    
     for shaperecord in shaperecords:
         pshp = shaperecord.shape.points
         shapeid = shaperecord.record[0] # the shapes are identified by the first attribute field
@@ -75,9 +78,20 @@ def warptodirect(direct_profile, df):
     df["straightenedx"], df["straightenedy"] = straightenedx, straightenedy
     
     vx = (df.straightenedx - df.straightenedx.shift()).fillna(0)
-    vy = (df.straightenedx - df.straightenedx.shift()).fillna(0)
+    vy = (df.straightenedy - df.straightenedy.shift()).fillna(0)
     df["straightenedsegleng"] = np.sqrt(vx**2 + vy**2)
     return straightenedx, straightenedy, cwtx, cwty, r0,r1
+
+# metre_interp: function that resamples the channel profiles every metre rather than at every point along the centre-line that has been drawn. Write these new values to a new dataframe with each year stored in it
+
+def metre_interp(x_orig, y_orig):
+    x_orig_min = math.ceil(min(x_orig))
+    x_orig_max = math.floor(max(x_orig))
+    
+    xvals = np.linspace(x_orig_min, x_orig_max, (x_orig_max - x_orig_min)+1)
+    yinterp = np.interp(xvals, x_orig, y_orig)
+    
+    return xvals, yinterp
 
 # makeweightseries: function that creates a tapered window which we can move along the channel length.
 
@@ -87,10 +101,12 @@ def makeweightseries(df, centreweightindex, centreweightlength):
     return w
     
 # windowed_sinuosity: function that calculates sinuosity of a channel over a window of given width with a taper as defined by the makeweightseries function
+
 def windowed_sinuosity(df):
     
     # make unit lengths
-    unitx = (df.straightenedx - df.straightenedx.shift()).fillna(0)                   
+    unitx = (df.straightenedx - df.straightenedx.shift()).fillna(0) 
+    #unitx = 1 #every metre
     wxs = [ ]
     wsin = [ ]
     centreweightlength = 50 # change as appropriate
@@ -107,5 +123,25 @@ def windowed_sinuosity(df):
     awsin = np.array(wsin)
     df['windowedsin'] = awsin
     return wxs, awsin
-    
 
+# windowed_sin_interp: function that calculates sinuosity of a channel over a window of given width with a taper as defined by the makeweightseries function, but applied to a channel with metre-scale resampling
+
+def windowed_sin_interp(df2, centreweightlength):
+    unitx = 1 #every metre
+    wxs = [ ]
+    wsin = [ ]
+    
+    for centreweightindex in range(len(df2.chan_xvals)):
+        w = makeweightseries(df2.chan_xvals, centreweightindex, centreweightlength)
+        wx = sum(w*df2.chan_xvals)/sum(w)
+        weightedstreamlength = sum(df2.straightenedsegleng*w)/sum(w)
+        weighteddirectlength = sum(unitx*w)/sum(w)
+        weightedsinuosity = weightedstreamlength/weighteddirectlength
+        wsin.append(weightedsinuosity)
+        wxs.append(wx)
+
+    wxs = np.array(wxs)
+    awsin = np.array(wsin)
+
+    df2['windowedsin'] = awsin
+    return wxs, awsin
