@@ -50,7 +50,7 @@ def transaxis(r0, r1, ax0, ax1, ay0, ay1, sx, sy):
     osdotperpav = (osx*ayv - osy*axv)/alen
     tx = osdotav + r0
     ty = osdotperpav
-    tw = 1.0/(0.6 + abs(osdotav/alen - 0.5).clip_lower(0.4))**2   # weighting
+    tw = 1.0/(0.6 + abs(osdotav/alen - 0.5).clip(lower=0.4)**2   # weighting
     return tx, ty, tw
 
 # warptodirect: function which transforms the profile of a river channel 
