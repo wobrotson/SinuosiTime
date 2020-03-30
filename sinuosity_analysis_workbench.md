@@ -67,7 +67,7 @@ plt.ylabel('y position [m]');
 ```
 
 
-![png](sinuosity_pub_files/sinuosity_pub_5_0.png)
+![png](images/sinuosity_workbook_images/sinuosity_pub_5_0.png)
 
 
 ## Warp channel profile so that the meander belt axis behaves as the x-axis, meaning that sinuosity can be calculated relative to this only (simplifying code)
@@ -104,7 +104,7 @@ plt.ylabel('lateral variance from meander belt axis [m]');
 ```
 
 
-![png](sinuosity_pub_files/sinuosity_pub_7_0.png)
+![png](images/sinuosity_workbook_images/sinuosity_pub_7_0.png)
 
 
 ## Calculate windowed sinuosity of the river channel where windows are not regularised ie depend only on the length of each digitised centre-line segment in the shapefile
@@ -125,7 +125,7 @@ plt.legend();
 ```
 
 
-![png](sinuosity_pub_files/sinuosity_pub_9_0.png)
+![png](images/sinuosity_workbook_images/sinuosity_pub_9_0.png)
 
 
 ## Resample the channel profiles at metre-resolution so that distance along reach consistent in the channel profiles
@@ -167,7 +167,7 @@ plt.ylabel('lateral variance from meander belt axis [m]');
 ```
 
 
-![png](sinuosity_pub_files/sinuosity_pub_11_0.png)
+![png](images/sinuosity_workbook_images/sinuosity_pub_11_0.png)
 
 
 
@@ -276,7 +276,7 @@ plt.savefig('sinuosity_CM%d_bath_corr.svg' %riverid)
 ```
 
 
-![png](sinuosity_pub_files/sinuosity_pub_14_0.png)
+![png](images/sinuosity_workbook_images/sinuosity_pub_14_0.png)
 
 
 ## Demonstrate the sensitivity of channel sinuosity to different window lengths
@@ -305,5 +305,5 @@ plt.savefig('windows_CM%d.png' %riverid)
 ```
 
 
-![png](sinuosity_pub_files/sinuosity_pub_16_0.png)
+![png](images/sinuosity_workbook_images/sinuosity_pub_16_0.png)
 
