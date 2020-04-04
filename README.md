@@ -15,9 +15,9 @@ This is a method I developed during my masters for calculating the sinuosity (ra
 
 ## Necessary Data and Software
 
-To digitise channel centrelines and meander belt axes, you will need access to a time series of satellite imagery of appropriate resolution and software which supports digitisation of features as polyline shapefiles. This could be done using, for example, Google Earth or QGIS (using the the Google Earth Engine plugin for accessing Google's database of satellite imagery). My sample data is given within the folder '*sinuosity_shapefiles*'.
+To digitise channel centrelines and meander belt axes, you will need access to a time series of satellite imagery of appropriate resolution and software which supports digitisation of features as polyline shapefiles. This could be done using, for example, Google Earth or QGIS (using the the Google Earth Engine plugin for accessing Google's database of satellite imagery). My sample data is given within the folder *'sinuosity_shapefiles'*.
 
-To perform the data processing and necessary analysis, I have used an interactive Python notebook environment (Jupyter within Anaconda). The dependent Python libraries for running the scripts are: math, matplotlib, numpy, pandas, pyshp, and string. Full dependencies are given in the environment file '*environment.yml*'. To install a given Python package, run the following command:
+To perform the data processing and necessary analysis, I have used an interactive Python notebook environment (Jupyter within Anaconda). The dependent Python libraries for running the scripts are: math, matplotlib, numpy, pandas, pyshp, and string. Full dependencies are given in the environment file *'environment.yml'*. To install a given Python package, run the following command:
 
 *pip install <package_name>* 
 
@@ -27,11 +27,11 @@ or, if working in a conda environment
 
 ## Running the code
 
-The sample workbook is published in the folder '*python*', and is named '*sinuosity_analysis_workbench.ipynb*'. A markdown file of this code is also published. All of the functions which underlie the analytical steps have been incorperated into a new python library, '*sinuutils*, and comprise the python script '*sinuutils.py*'.
+The sample workbook is published in the folder '*python*', and is named *'sinuosity_analysis_workbench.ipynb'*. A markdown file of this code is also published with the same name. All of the functions which underlie the analytical steps have been incorperated into a new python library, *'sinuutils'*, and comprise the python script *'sinuutils.py'*.
 
 ## Sample application to real-world geomorphology
 
-An example of how I used this method to analyse stream channel geomorphology through time during my masters' thesis is given in the file '*method_results_presentation.md*'. I present the application of the method to one channel in the study area, which is located at the Dead Sea and has a [very rapidly evolving geomorphology](https://www.solid-earth.net/10/1451/2019/se-10-1451-2019.html).
+An example of how I used this method to analyse stream channel geomorphology through time during my masters' thesis is given in the file *'method_results_presentation.md'*. I present the application of the method to one channel in the study area, which is located at the Dead Sea and has a [very rapidly evolving geomorphology](https://www.solid-earth.net/10/1451/2019/se-10-1451-2019.html).
 
 ## Improvements and future work
 
