@@ -1,4 +1,4 @@
-# SinuosiTime: Evaluating the spatio-temporal evolution of the sinuosity of channels undergoing base-level fall cut by groundwater-fed springs using high-resolution satellite imagery
+# SinuosiTime: evaluating the spatio-temporal evolution of the sinuosity of channels undergoing base-level fall cut by groundwater-fed springs using high-resolution satellite imagery
 *Presentation of a method for creating time series of channel sinuosity evolution from satellite imagery, along with a brief description and interpretation of results from the Ghor Al-Haditha study site, eastern Dead Sea shore, Jordan.*
 
 
@@ -10,10 +10,10 @@ Department of Earth Sciences, University College Dublin, Ireland\
 
 ## Summary
 
-This is a method I developed during my masters for calculating the sinuosity (ratio of channel centre-line length to valley length) of stream channels using satellite images from different timestamps is presented for an example case study in the area of Ghor Al-Haditha, Dead Sea eastern shore, Jordan, where the regional hydrological base-level has fallen almost 40 m since the 1960s. The method involves manually digitising the channel centreline 'thread' as a line shapefile for each timestamp in a GIS software package, and then calculating the sinuosity for each timestamp with a new Python library '*sinuutils*' written for the task. A moving window of fixed length is applied to interrogate each sinuosity timestamp spatially, with the channel profile resampled at 1 m intervals to normalise for length. Results obtained for the Dead Sea eastern shore site of Ghor Al-Haditha in Jordan are presented. At this site, channels cut by groundwater springs have developed new meanders, modified existing meanders and incised vertically since the year 2000, their evolution apparently triggered by the decline in Dead Sea level and the synchronous retreat of the lake shoreline. 
+This is a method I developed during my masters for calculating the sinuosity (ratio of channel centre-line length to valley length) of stream channels using satellite images from different timestamps. The method involves manually digitising the channel centreline 'thread' as a line shapefile for each timestamp in a GIS software package, and then calculating the sinuosity for each timestamp with a new Python library '*sinuutils*' written for the task. A moving window of fixed length is applied to interrogate each sinuosity timestamp spatially, with the channel profile resampled at 1 m intervals to normalise for length. Results obtained for the Dead Sea eastern shore site of Ghor Al-Haditha in Jordan are presented. At this site, channels cut by groundwater springs have developed new meanders, modified existing meanders and incised vertically since the year 2000, their evolution apparently triggered by the decline in Dead Sea level (the regional hydrological base-level), which has fallen almost 40 m since the 1960s, and the synchronous retreat of the lake shoreline.  
 
 
-## Necessary Data and Software
+## Necessary data and software
 
 To digitise channel centrelines and meander belt axes, you will need access to a time series of satellite imagery of appropriate resolution and software which supports digitisation of features as polyline shapefiles. This could be done using, for example, Google Earth or QGIS (using the the Google Earth Engine plugin for accessing Google's database of satellite imagery). My sample data is given within the folder *'sinuosity_shapefiles'*.
 
