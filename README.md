@@ -35,6 +35,8 @@ An example of how I used this method to analyse stream channel geomorphology thr
 
 ## Improvements and future work
 
-The method outlined here has several issues that need fixing (this will be done in due course). I've raised issues where I think improvements can be made to the code. If you notice anything that you think should be improved, related to either the code itself or my geomorphological assumptions and interpretations, please let me know by raising an issue yourself!
+The method outlined here has several issues that need fixing (this will be done in due course). I've [raised issues](https://github.com/wobrotson/SinuosiTime/issues) where I think improvements can be made to the code. If you notice anything that you think should be improved, related to either the code itself or my geomorphological assumptions and interpretations, please let me know by raising an issue yourself!
+
+I have a few ideas for future directions for the project, such as integrating the tool with other Python codes written to analyse stream channels, such as [DeepRiver](https://github.com/isikdogan/deepriver) (for automation of channel centreline extraction) and [ChanGeom](https://github.com/BodoBookhagen/ChanGeom) for estimating and modelling channel planform topography in the case that high-resolution topographic models are not available. If you would like to collaborate on these then I would love to hear from you!
 
 Ultimately, I hope to be able to turn the method into a plugin for QGIS, so that it can be used directly within one software package. This may take some time...
