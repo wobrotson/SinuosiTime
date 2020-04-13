@@ -17,7 +17,16 @@ This is a method I developed during my masters for calculating the sinuosity (ra
 
 To digitise channel centrelines and meander belt axes, you will need access to a time series of satellite imagery of appropriate resolution and software which supports digitisation of features as polyline shapefiles. This could be done using, for example, Google Earth or QGIS (using the the Google Earth Engine plugin for accessing Google's database of satellite imagery). My sample data is given within the folder *'sinuosity_shapefiles'*.
 
-To perform the data processing and necessary analysis, I have used an interactive Python notebook environment (Jupyter within Anaconda). The dependent Python libraries for running the scripts are: math, matplotlib, numpy, pandas, pyshp, and string. Full dependencies are given in the environment file *'environment.yml'*. To install a given Python package, run the following command:
+To perform the data processing and necessary analysis, I have used an interactive [Python 3](https://www.python.org/downloads/) notebook environment ([Jupyter](https://jupyter.org/) within [Anaconda](https://www.anaconda.com/)). The dependent Python libraries for running the scripts are: 
+
+- [math (usually included in Python 3 standard library)](https://github.com/python/cpython/blob/master/Modules/mathmodule.c)
+- [matplotlib](https://matplotlib.org/)
+- [NumPy](https://numpy.org/)
+- [pandas](https://pandas.pydata.org/)
+- [PyShp](https://pypi.org/project/pyshp/) 
+- [string (usually included in Python 3 standard library)](https://github.com/python/cpython/blob/2.7/Lib/string.py)
+
+To install a given Python package, run the following command:
 
 *pip install <package_name>* 
 
@@ -27,7 +36,7 @@ or, if working in a conda environment
 
 ## Running the code
 
-The sample workbook is published in the folder '*python*', and is named *'sinuosity_analysis_workbench.ipynb'*. A markdown file of this code is also published with the same name. All of the functions which underlie the analytical steps have been incorperated into a new python library, *'sinuutils'*, and comprise the python script *'sinuutils.py'*.
+The sample workbook is published in the folder '*python*', and is named *'SinuosiTime_analysis_workbench.ipynb'*. A markdown file of this code is also published with the same name. All of the functions which underlie the analytical steps have been incorperated into a new python library, *'sinuutils'*, and comprise the python script *'sinuutils.py'*.
 
 ## Sample application to real-world geomorphology
 

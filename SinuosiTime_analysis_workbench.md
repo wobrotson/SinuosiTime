@@ -1,12 +1,32 @@
-# Workbench for analysis of the sinuosity of stream channels at Ghor Al-Haditha using shapefiles of channel centrelines digitised from high-resolution satellite imagery
+# SinuosiTime: workbench for analysis of the sinuosity of stream channels at Ghor Al-Haditha using shapefiles of channel centrelines digitised from high-resolution satellite imagery)
 
 **Robert A. Watson**\
 Department of Earth Sciences, University College Dublin, Ireland\
-*robert.watson@ucd.ie*
+*robert.watson@ucd.ie*)
 
-**Date**: 30.03.2020
+**Date**: 13.04.2020
 
-## Import the data and setup the workspace and dataframes for subsequent analysis
+### Dependencies:
+
+- [Python 3](https://www.python.org/downloads/)
+- [math (usually included in Python 3 standard library)](https://github.com/python/cpython/blob/master/Modules/mathmodule.c)
+- [matplotlib](https://matplotlib.org/)
+- [NumPy](https://numpy.org/)
+- [pandas](https://pandas.pydata.org/)
+- [PyShp](https://pypi.org/project/pyshp/) 
+- [string (usually included in Python 3 standard library)](https://github.com/python/cpython/blob/2.7/Lib/string.py)
+
+I recommend using the [Anaconda platform](https://www.anaconda.com/) as your coding environment to build/use this workflow. Another useful page might be the Python 3 standard library documentation, available [here](https://docs.python.org/3/library/index.html). To install a given Python package, run the following command:
+
+*pip install <package_name>* 
+
+or, if working in a conda environment
+
+*conda install <package_name>* 
+
+You will also need access to the [channel centreline and meander belt axis data](https://github.com/wobrotson/SinuosiTime/tree/master/sinuosity_shapefiles?raw=true) and the Python package [sinuutils](https://github.com/wobrotson/SinuosiTime/blob/master/python/sinuutils.py). Both are included within the Github repository [SinuosiTime](https://github.com/wobrotson/SinuosiTime).
+
+## Import channel centreline and meander belt axis data and setup the workspace and dataframes for subsequent analysis
 
 
 ```python
@@ -17,7 +37,6 @@ riverid = 6 # id of channel being analysed (CM_riverid)
 channelname = '../sinuosity_shapefiles/sin_CM%d.shp' % riverid # define channel to be analysed
 yearrivers = readshapestopandas(channelname)
 # in yearrivers shapeid from readshapestopandas is the year that the profile was drawn
-
 ```
 
 
@@ -48,7 +67,7 @@ print(dp_head);
     4  31.320270  35.532101 -365.853177  403.907083  113.737438  625.499523
 
 
-## Plot profile for chosen channel in space relative to position of channel head
+## Plot centrelines for chosen channel for years analysed in space relative to position of channel head (assumed to be fixed)
 
 
 ```python
@@ -61,16 +80,16 @@ for year, df in yearrivers:
 plt.plot(direct_profile.x, direct_profile.y, color='k',linestyle='--',
          linewidth=0.8, label='meander belt axis')
 plt.legend(loc='lower left',frameon=False)  
-plt.title('CM%d planform profiles, raw data' % riverid)
+plt.title('CM%d centrelines, raw data' % riverid)
 plt.xlabel('x position [m]')
 plt.ylabel('y position [m]');
 ```
 
 
-![png](images/sinuosity_workbook_images/sinuosity_pub_5_0.png)
+![png](images/SinuosiTime_analysis_workbench_files/SinuosiTime_analysis_workbench_5_0.png)
 
 
-## Warp channel profile so that the meander belt axis behaves as the x-axis, meaning that sinuosity can be calculated relative to this only (simplifying code)
+## Warp centrelines so that the meander belt axis behaves as the x-axis, meaning that sinuosity can be calculated relative to this only (simplifying code)
 
 
 ```python
@@ -97,17 +116,16 @@ legend_x = 1
 legend_y = 0.5
 plt.legend(loc='center left', bbox_to_anchor=(legend_x, legend_y))
 
-plt.title('CM%d planform profiles, straightened x-axis' % riverid)
+plt.title('CM%d centrelines, straightened x-axis' % riverid)
 plt.xlabel('distance along meander belt axis [m]')
 plt.ylabel('lateral variance from meander belt axis [m]');
-
 ```
 
 
-![png](images/sinuosity_workbook_images/sinuosity_pub_7_0.png)
+![png](images/SinuosiTime_analysis_workbench_files/SinuosiTime_analysis_workbench_7_0.png)
 
 
-## Calculate windowed sinuosity of the river channel where windows are not regularised ie depend only on the length of each digitised centre-line segment in the shapefile
+## Calculate windowed sinuosity of the river channel where windows are not regularised ie represent a pre-defined number of centreline segments as digitised in the shapefile
 
 
 ```python
@@ -125,10 +143,10 @@ plt.legend();
 ```
 
 
-![png](images/sinuosity_workbook_images/sinuosity_pub_9_0.png)
+![png](images/SinuosiTime_analysis_workbench_files/SinuosiTime_analysis_workbench_9_0.png)
 
 
-## Resample the channel profiles at metre-resolution so that distance along reach consistent in the channel profiles
+## Resample the centrelines at metre-resolution so that distance along reach is consistent and regularised between different years
 
 
 ```python
@@ -167,7 +185,7 @@ plt.ylabel('lateral variance from meander belt axis [m]');
 ```
 
 
-![png](images/sinuosity_workbook_images/sinuosity_pub_11_0.png)
+![png](images/SinuosiTime_analysis_workbench_files/SinuosiTime_analysis_workbench_11_0.png)
 
 
 
@@ -192,7 +210,7 @@ print(yr_i); #example data for year 2000
     [392 rows x 3 columns])]
 
 
-## Calculate windowed sinuosity of the river channel where window length can now be expressed in metres (absolute distance) rather than relative position of nodes
+## Calculate windowed sinuosity: window length can now be expressed in metres (absolute distance) rather than relative position of nodes along centreline
 
 
 ```python
@@ -269,14 +287,11 @@ ax3.xaxis.set_minor_formatter(ticker.FixedFormatter(new_xtick_int))
 for tick in ax3.xaxis.get_minor_ticks():
     tick.tick1line.set_markersize(0)
     tick.tick2line.set_markersize(0)
-    tick.label1.set_horizontalalignment('center')
-    
-plt.savefig('sinuosity_CM%d_bath_corr.png' %riverid)
-plt.savefig('sinuosity_CM%d_bath_corr.svg' %riverid)
+    tick.label1.set_horizontalalignment('center');
 ```
 
 
-![png](images/sinuosity_workbook_images/sinuosity_pub_14_0.png)
+![png](images/SinuosiTime_analysis_workbench_files/SinuosiTime_analysis_workbench_14_0.png)
 
 
 ## Demonstrate the sensitivity of channel sinuosity to different window lengths
@@ -300,10 +315,9 @@ for n in range(0,4):
         plt.xlabel('distance along straightened profile [m]', fontsize=12)
         plt.ylabel('sinuosity', fontsize=12)
 
-plt.legend(loc = 'upper right')
-plt.savefig('windows_CM%d.png' %riverid)
+plt.legend(loc = 'upper right');
 ```
 
 
-![png](images/sinuosity_workbook_images/sinuosity_pub_16_0.png)
+![png](images/SinuosiTime_analysis_workbench_files/SinuosiTime_analysis_workbench_16_0.png)
 
